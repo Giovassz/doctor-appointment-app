@@ -31,7 +31,7 @@ class AdminUserSeeder extends Seeder
         // Let's assume RoleSeeder was run or roles exist. 
         // If not, this won't break basic login.
         try {
-            $admin->assignRole('Admin');
+            $admin->assignRole('Administrador');
         } catch (\Throwable $e) {
             // Role might not exist yet, ignoring to allow login
         }

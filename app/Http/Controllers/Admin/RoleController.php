@@ -76,7 +76,7 @@ class RoleController extends Controller
             'text' => 'The role has been created successfully.',
         ]);
 
-        return redirect()->route('roles.index');
+        return redirect()->route('admin.roles.index');
     }
 
     /**
@@ -110,7 +110,7 @@ class RoleController extends Controller
             'text' => 'The role has been updated successfully.',
         ]);
 
-        return redirect()->route('roles.index');
+        return redirect()->route('admin.roles.index');
     }
 
     /**
@@ -134,6 +134,6 @@ class RoleController extends Controller
             'text' => 'The role has been deleted successfully.',
         ]);
 
-        return redirect()->route('roles.index');
+        return redirect()->route('admin.roles.index');
     }
 }

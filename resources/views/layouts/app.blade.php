@@ -13,6 +13,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="https://kit.fontawesome.com/e9e74fca35.js" crossorigin="anonymous"></script>
 
         <!-- Styles -->
         @livewireStyles
@@ -53,5 +54,17 @@
         @stack('modals')
 
         @livewireScripts
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                @if (session('swal'))
+                    Swal.fire({
+                        icon: "{{ session('swal.icon') }}",
+                        title: "{{ session('swal.title') }}",
+                        text: "{{ session('swal.text') }}",
+                        confirmButtonColor: '#3085d6',
+                    });
+                @endif
+            });
+        </script>
     </body>
 </html>

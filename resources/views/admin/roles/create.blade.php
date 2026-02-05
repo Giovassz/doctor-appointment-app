@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 
-                <form method="POST" action="{{ route('roles.store') }}">
+                <form method="POST" action="{{ route('admin.roles.store') }}">
                     @csrf
 
                     <div class="grid grid-cols-1 gap-6">
@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="flex items-center justify-end mt-6">
-                        <a href="{{ route('roles.index') }}" class="text-gray-600 hover:text-gray-900 mr-4">Cancel</a>
+                        <a href="{{ route('admin.roles.index') }}" class="text-gray-600 hover:text-gray-900 mr-4">Cancel</a>
                         <x-button class="ml-4">
                             {{ __('Create Role') }}
                         </x-button>

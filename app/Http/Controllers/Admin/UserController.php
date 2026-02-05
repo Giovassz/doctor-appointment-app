@@ -62,7 +62,7 @@ class UserController extends Controller
             'role' => 'required|exists:roles,name',
         ]);
 
-        $user = User::create([
+        $user = \App\Models\User::create([
             'name' => $request->name,
             'email' => $request->email,
             'id_number' => $request->id_number,
@@ -74,13 +74,10 @@ class UserController extends Controller
         // Find role for web guard to ensure compatibility
         $role = Role::where('name', $request->role)->where('guard_name', 'web')->first();
         
-        // If not found (e.g. only sanctum role exists), create it for web guard
         if (!$role) {
             $anyRole = Role::where('name', $request->role)->first();
             if ($anyRole) {
                 $role = Role::create(['name' => $request->role, 'guard_name' => 'web']);
-                // Try to sync permissions if possible, but basic role existence is key
-                // $role->syncPermissions($anyRole->permissions); 
             }
         }
 
@@ -88,16 +85,37 @@ class UserController extends Controller
             $user->assignRole($role);
         }
 
-        // Flash sweet alert via session or specific package if installed. 
-        // Assuming we pass data to view or use a middleware/flasher.
-        // For simplicity, standard session flash + client-side SWAL handling.
+        // Logical split for Patient creation
+        if ($request->role === 'Paciente') {
+            // Split name into first and last name if possible
+            $names = explode(' ', $request->name, 2);
+            $firstName = $names[0];
+            $lastName = isset($names[1]) ? $names[1] : '';
+
+            \App\Models\Patient::create([
+                'first_name' => $firstName,
+                'last_name' => $lastName,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+            ]);
+
+            session()->flash('swal', [
+                'icon' => 'success',
+                'title' => '¡Usuario y Paciente Creados!',
+                'text' => 'El usuario ha sido registrado y se ha creado su ficha de paciente automáticamente.',
+            ]);
+
+            return redirect()->route('admin.patients.index');
+        }
+
         session()->flash('swal', [
             'icon' => 'success',
-            'title' => 'User Created',
-            'text' => 'The user has been created successfully.',
+            'title' => '¡Usuario Creado!',
+            'text' => 'El usuario ha sido registrado exitosamente.',
         ]);
 
-        return redirect()->route('users.index');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -164,7 +182,7 @@ class UserController extends Controller
             'text' => 'The user has been updated successfully.',
         ]);
 
-        return redirect()->route('users.index');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -189,6 +207,6 @@ class UserController extends Controller
             'text' => 'The user has been deleted successfully.',
         ]);
 
-        return redirect()->route('users.index');
+        return redirect()->route('admin.users.index');
     }
 }

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create User') }}
+            {{ __('Crear Usuario') }}
         </h2>
     </x-slot>
 
@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 
-                <form method="POST" action="{{ route('users.store') }}">
+                <form method="POST" action="{{ route('admin.users.store') }}">
                     @csrf
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="flex items-center justify-end mt-6">
-                        <a href="{{ route('users.index') }}" class="text-gray-600 hover:text-gray-900 mr-4">Cancel</a>
+                        <a href="{{ route('admin.users.index') }}" class="text-gray-600 hover:text-gray-900 mr-4">Cancel</a>
                         <x-button class="ml-4">
                             {{ __('Create User') }}
                         </x-button>

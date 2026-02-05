@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 
-                <form method="POST" action="{{ route('users.update', $user) }}">
+                <form method="POST" action="{{ route('admin.users.update', $user) }}">
                     @csrf
                     @method('PUT')
 
@@ -77,7 +77,7 @@
                     </div>
 
                     <div class="flex items-center justify-end mt-6">
-                        <a href="{{ route('users.index') }}" class="text-gray-600 hover:text-gray-900 mr-4">Cancel</a>
+                        <a href="{{ route('admin.users.index') }}" class="text-gray-600 hover:text-gray-900 mr-4">Cancel</a>
                         <x-button class="ml-4">
                             {{ __('Update User') }}
                         </x-button>

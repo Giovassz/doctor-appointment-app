@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,15 +15,20 @@ class DatabaseSeeder extends Seeder
     {
         //LLamar al RoleSeeder creado
         $this->call([
-            RoleSeeder::class
+            PermissionSeeder::class,
+            RoleSeeder::class,
+            BloodTypeSeeder::class,
+            AdminUserSeeder::class,
         ]);
         
 
         //Crear un usuario de prueba cada que ejecuto migrations
-        User::factory()->create([
+        $user = User::factory()->create([
             'name' => 'Rodrigo Gaxiola',
             'email' => 'rodrigo@software.com.mx',
             'password' => bcrypt('12345678'),
         ]);
+
+        $user->assignRole('Administrador');
     }
 }

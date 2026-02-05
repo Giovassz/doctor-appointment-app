@@ -3,7 +3,7 @@
     <div class="px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <!-- Mobile Logo (shown only on small screens if needed, otherwise hidden because Sidebar has it) -->
+                <!-- Mobile Logo -->
                 <div class="shrink-0 flex items-center md:hidden">
                     <a href="{{ route('dashboard') }}">
                          <img src="{{ asset('images/logoMedic.png') }}" alt="Medic Logo" class="h-9 w-auto object-contain">
@@ -36,16 +36,16 @@
                         <x-slot name="content">
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Account') }}
+                                {{ __('Administrar Cuenta') }}
                             </div>
 
                             <x-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
+                                {{ __('Perfil') }}
                             </x-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-dropdown-link href="{{ route('api-tokens.index') }}">
-                                    {{ __('API Tokens') }}
+                                    {{ __('Tokens de API') }}
                                 </x-dropdown-link>
                             @endif
 
@@ -57,7 +57,7 @@
 
                                 <x-dropdown-link href="{{ route('logout') }}"
                                          @click.prevent="$root.submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('Cerrar Sesión') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>
@@ -83,10 +83,10 @@
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" class="text-gray-300 hover:bg-gray-800 hover:text-white">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')" class="text-gray-300 hover:bg-gray-800 hover:text-white">
-                {{ __('Users') }}
+            <x-responsive-nav-link href="{{ route('admin.users.index') }}" :active="request()->routeIs('admin.users.*')" class="text-gray-300 hover:bg-gray-800 hover:text-white">
+                {{ __('Usuarios') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('roles.index') }}" :active="request()->routeIs('roles.*')" class="text-gray-300 hover:bg-gray-800 hover:text-white">
+            <x-responsive-nav-link href="{{ route('admin.roles.index') }}" :active="request()->routeIs('admin.roles.*')" class="text-gray-300 hover:bg-gray-800 hover:text-white">
                 {{ __('Roles') }}
             </x-responsive-nav-link>
         </div>
@@ -109,12 +109,12 @@
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
                 <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')" class="text-gray-300 hover:bg-gray-800 hover:text-white">
-                    {{ __('Profile') }}
+                    {{ __('Perfil') }}
                 </x-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')" class="text-gray-300 hover:bg-gray-800 hover:text-white">
-                        {{ __('API Tokens') }}
+                        {{ __('Tokens de API') }}
                     </x-responsive-nav-link>
                 @endif
 
@@ -124,7 +124,7 @@
 
                     <x-responsive-nav-link href="{{ route('logout') }}"
                                    @click.prevent="$root.submit();" class="text-gray-300 hover:bg-gray-800 hover:text-white">
-                        {{ __('Log Out') }}
+                        {{ __('Cerrar Sesión') }}
                     </x-responsive-nav-link>
                 </form>
 
@@ -133,17 +133,17 @@
                     <div class="border-t border-gray-800"></div>
 
                     <div class="block px-4 py-2 text-xs text-gray-400">
-                        {{ __('Manage Team') }}
+                        {{ __('Administrar Equipo') }}
                     </div>
 
                     <!-- Team Settings -->
                     <x-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')" class="text-gray-300 hover:bg-gray-800 hover:text-white">
-                        {{ __('Team Settings') }}
+                        {{ __('Configuración del Equipo') }}
                     </x-responsive-nav-link>
 
                     @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
                         <x-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')" class="text-gray-300 hover:bg-gray-800 hover:text-white">
-                            {{ __('Create New Team') }}
+                            {{ __('Crear Nuevo Equipo') }}
                         </x-responsive-nav-link>
                     @endcan
 
@@ -152,7 +152,7 @@
                         <div class="border-t border-gray-800"></div>
 
                         <div class="block px-4 py-2 text-xs text-gray-400">
-                            {{ __('Switch Teams') }}
+                            {{ __('Cambiar Equipos') }}
                         </div>
 
                         @foreach (Auth::user()->allTeams() as $team)
