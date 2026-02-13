@@ -14,6 +14,8 @@ class Patient extends Model
         'address',
         'allergies',
         'blood_type_id',
+        'emergency_contact_name',
+        'emergency_contact_phone',
     ];
 
     public function bloodType()

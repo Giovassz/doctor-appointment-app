@@ -69,14 +69,22 @@ class PatientController extends Controller
      */
     public function update(Request $request, Patient $patient)
     {
+        // Limpiar teléfonos antes de validar (solo dejar dígitos)
+        $request->merge([
+            'phone' => $request->phone ? preg_replace('/\D/', '', $request->phone) : null,
+            'emergency_contact_phone' => $request->emergency_contact_phone ? preg_replace('/\D/', '', $request->emergency_contact_phone) : null,
+        ]);
+
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:patients,email,' . $patient->id,
-            'phone' => 'nullable|string|max:20',
+            'phone' => 'nullable|string|digits:10',
             'blood_type_id' => 'nullable|exists:blood_types,id',
             'allergies' => 'nullable|string',
             'address' => 'nullable|string',
+            'emergency_contact_name' => 'nullable|string|max:255',
+            'emergency_contact_phone' => 'nullable|string|digits:10',
         ]);
 
         $patient->update($request->all());

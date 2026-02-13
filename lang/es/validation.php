@@ -281,5 +281,8 @@ return [
         'winner'                   => 'ganador',
         'work'                     => 'trabajo',
         'year'                     => 'año',
+        'blood_type_id'            => 'tipo de sangre',
+        'emergency_contact_name'   => 'nombre de contacto de emergencia',
+        'emergency_contact_phone'  => 'teléfono de contacto de emergencia',
     ],
 ];
