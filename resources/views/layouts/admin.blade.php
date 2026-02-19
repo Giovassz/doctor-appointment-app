@@ -26,6 +26,7 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased bg-gray-50">
+        <x-wire-notifications />
         
         @include('layouts.includes.admin.navigation')
 

@@ -33,6 +33,12 @@ class PermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => 'patients.create', 'guard_name' => $guard]);
             Permission::firstOrCreate(['name' => 'patients.edit', 'guard_name' => $guard]);
             Permission::firstOrCreate(['name' => 'patients.destroy', 'guard_name' => $guard]);
+
+            // Doctors Permissions
+            Permission::firstOrCreate(['name' => 'doctors.index', 'guard_name' => $guard]);
+            Permission::firstOrCreate(['name' => 'doctors.create', 'guard_name' => $guard]);
+            Permission::firstOrCreate(['name' => 'doctors.edit', 'guard_name' => $guard]);
+            Permission::firstOrCreate(['name' => 'doctors.destroy', 'guard_name' => $guard]);
         }
 
         // Assign all permissions to Administrador role (for both guards)

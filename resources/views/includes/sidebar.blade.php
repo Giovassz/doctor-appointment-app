@@ -6,14 +6,44 @@
             <li>
                 <a href="{{ route('dashboard') }}"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white"
-                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
-                        <path
-                            d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
-                        <path
-                            d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
-                    </svg>
+                    <i class="fa-solid fa-gauge w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white flex items-center justify-center"></i>
                     <span class="ms-3">Dashboard</span>
+                </a>
+            </li>
+
+            <div class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase">
+                Gestión
+            </div>
+
+            <li>
+                <a href="{{ route('admin.roles.index') }}"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ request()->routeIs('admin.roles.*') ? 'bg-gray-100 dark:bg-gray-700' : '' }}">
+                    <i class="fa-solid fa-shield-halved w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white flex items-center justify-center"></i>
+                    <span class="ms-3">Roles y Permisos</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('admin.users.index') }}"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ request()->routeIs('admin.users.*') ? 'bg-gray-100 dark:bg-gray-700' : '' }}">
+                    <i class="fa-solid fa-users w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white flex items-center justify-center"></i>
+                    <span class="ms-3">Usuarios</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('admin.patients.index') }}"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ request()->routeIs('admin.patients.*') ? 'bg-gray-100 dark:bg-gray-700' : '' }}">
+                    <i class="fa-solid fa-user-injured w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white flex items-center justify-center"></i>
+                    <span class="ms-3">Pacientes</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('admin.doctors.index') }}"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ request()->routeIs('admin.doctors.*') ? 'bg-gray-100 dark:bg-gray-700' : '' }}">
+                    <i class="fa-solid fa-user-md w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white flex items-center justify-center"></i>
+                    <span class="ms-3">Doctores</span>
                 </a>
             </li>
         </ul>

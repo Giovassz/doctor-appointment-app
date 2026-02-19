@@ -19,15 +19,18 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             BloodTypeSeeder::class,
             AdminUserSeeder::class,
+            SpecialitySeeder::class,
         ]);
         
 
         //Crear un usuario de prueba cada que ejecuto migrations
-        $user = User::factory()->create([
-            'name' => 'Rodrigo Gaxiola',
-            'email' => 'rodrigo@software.com.mx',
-            'password' => bcrypt('12345678'),
-        ]);
+        $user = User::updateOrCreate(
+            ['email' => 'rodrigo@software.com.mx'],
+            [
+                'name' => 'Rodrigo Gaxiola',
+                'password' => bcrypt('12345678'),
+            ]
+        );
 
         $user->assignRole('Administrador');
     }
