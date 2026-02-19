@@ -29,11 +29,13 @@ class DoctorTable extends DataTableComponent
 
             Column::make("Especialidad", "speciality.name")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->format(fn($value) => $value ?: 'N/A'),
 
             Column::make("Licencia", "medical_license_number")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->format(fn($value) => $value ?: 'N/A'),
 
             Column::make("Acciones")
                 ->label(function ($row) {

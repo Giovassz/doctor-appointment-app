@@ -20,10 +20,10 @@
                             {{ $patient->email }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {{ $patient->phone }}
+                            {{ $patient->phone ?? 'N/A' }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {{ $patient->bloodType->name ?? 'No asignado' }}
+                            {{ $patient->bloodType->name ?? 'N/A' }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{ route('admin.patients.edit', $patient) }}" class="text-blue-600 hover:text-blue-900">Editar</a>

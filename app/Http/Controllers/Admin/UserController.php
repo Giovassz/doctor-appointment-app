@@ -108,6 +108,19 @@ class UserController extends Controller
 
             return redirect()->route('admin.patients.index');
         }
+        if ($request->role === 'Doctor') {
+            $doctor = \App\Models\Doctor::create([
+                'user_id' => $user->id,
+            ]);
+
+            session()->flash('swal', [
+                'icon' => 'success',
+                'title' => '¡Usuario y Doctor Creados!',
+                'text' => 'El usuario ha sido registrado exitosamente. Ahora puedes completar su información de doctor.',
+            ]);
+
+            return redirect()->route('admin.doctors.edit', $doctor);
+        }
 
         session()->flash('swal', [
             'icon' => 'success',

@@ -33,8 +33,25 @@ class EditDoctor extends Component
     {
         return [
             'speciality_id' => 'nullable|exists:specialities,id',
-            'medical_license_number' => 'nullable|string|max:255',
-            'biography' => 'nullable|string',
+            'medical_license_number' => 'nullable|numeric|digits:15',
+            'biography' => [
+                'nullable',
+                'string',
+                function ($attribute, $value, $fail) {
+                    $wordCount = count(preg_split('/\s+/', trim($value), -1, PREG_SPLIT_NO_EMPTY));
+                    if ($wordCount > 150) {
+                        $fail('La biografía no puede tener más de 150 palabras (actualmente: ' . $wordCount . ').');
+                    }
+                },
+            ],
+        ];
+    }
+
+    protected function messages()
+    {
+        return [
+            'medical_license_number.digits' => 'La licencia debe tener exactamente 15 números.',
+            'medical_license_number.numeric' => 'La licencia solo puede contener números.',
         ];
     }
 

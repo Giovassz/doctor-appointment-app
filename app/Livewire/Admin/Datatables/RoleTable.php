@@ -28,7 +28,7 @@ class RoleTable extends DataTableComponent
             Column::make("Fecha", "updated_at")
                 ->sortable()
                 ->format(function ($value) {
-                    return $value->format('d/m/Y');
+                    return $value ? $value->format('d/m/Y') : 'N/A';
                 }),
             Column::make("Acciones")
                 ->label(function ($row) {
