@@ -61,7 +61,22 @@ class PatientController extends Controller
     public function edit(Patient $patient)
     {
         $bloodTypes = BloodType::all();
-        return view('admin.patients.edit', compact('patient', 'bloodTypes'));
+
+        $initialTab = 'personal';
+        if (request()->session()->has('errors')) {
+            $errors = request()->session()->get('errors');
+            if ($errors->hasAny(['first_name', 'last_name', 'email', 'phone'])) {
+                $initialTab = 'personal';
+            } elseif ($errors->hasAny(['blood_type_id', 'allergies'])) {
+                $initialTab = 'medical';
+            } elseif ($errors->has('address')) {
+                $initialTab = 'general';
+            } elseif ($errors->hasAny(['emergency_contact_name', 'emergency_contact_phone'])) {
+                $initialTab = 'emergency';
+            }
+        }
+
+        return view('admin.patients.edit', compact('patient', 'bloodTypes', 'initialTab'));
     }
 
     /**
