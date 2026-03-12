@@ -12,12 +12,26 @@ class Calendar extends Component
     public $year;
     public $month;
     public $doctorId = null;
+    public $selectedAppointment = null;
+    public $showAppointmentModal = false;
 
     public function mount()
     {
         $now = Carbon::now();
         $this->year = $now->year;
         $this->month = $now->month;
+    }
+
+    public function selectAppointment($id)
+    {
+        $this->selectedAppointment = Appointment::with(['patient', 'doctor.user'])->find($id);
+        $this->showAppointmentModal = true;
+    }
+
+    public function closeAppointmentModal()
+    {
+        $this->showAppointmentModal = false;
+        $this->selectedAppointment = null;
     }
 
     public function nextMonth()
@@ -71,12 +85,17 @@ class Calendar extends Component
         
         while ($current <= $endOfGrid) {
             $dayDate = $current->format('Y-m-d');
+            // Fix: Filter using string comparison to avoid Carbon vs string issues
+            $dayAppointments = $appointments->filter(function($appt) use ($dayDate) {
+                return $appt->date->format('Y-m-d') === $dayDate;
+            });
+
             $grid[] = [
                 'date' => $dayDate,
                 'day' => $current->day,
                 'isCurrentMonth' => $current->month == $this->month,
                 'isToday' => $current->isToday(),
-                'appointments' => $appointments->where('date', $dayDate)
+                'appointments' => $dayAppointments
             ];
             $current->addDay();
         }
