@@ -95,7 +95,7 @@
 
     {{-- Appointment Preview Modal --}}
     <x-wire-modal wire:model="showAppointmentModal" max-width="md">
-        <x-card title="Detalles de la Cita">
+        <x-wire-card title="Detalles de la Cita">
             @if($selectedAppointment)
                 <div class="space-y-4">
                     <div class="flex items-center gap-4 bg-blue-50 p-4 rounded-lg">
@@ -159,6 +159,6 @@
                     <x-wire-button flat label="Cerrar" x-on:click="close" class="ml-auto" />
                 </div>
             </x-slot>
-        </x-card>
+        </x-wire-card>
     </x-wire-modal>
 </div>
