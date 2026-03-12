@@ -16,7 +16,7 @@
                             :options="$doctors"
                             option-label="name"
                             option-value="id"
-                            icon="user-md"
+                            icon="user"
                         />
                     </div>
 
