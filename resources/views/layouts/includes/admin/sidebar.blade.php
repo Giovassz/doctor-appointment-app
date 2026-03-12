@@ -34,6 +34,18 @@ $links = [
         'href' => route('admin.doctors.index'),
         'active' => request()->routeIs('admin.doctors.*'),
     ],
+    [
+        'name' => 'Citas médicas',
+        'icon' => 'fa-solid fa-calendar-check',
+        'href' => route('admin.appointments.index'),
+        'active' => request()->routeIs('admin.appointments.*'),
+    ],
+    [
+        'name' => 'Calendario',
+        'icon' => 'fa-solid fa-calendar-days',
+        'href' => route('admin.calendar'),
+        'active' => request()->routeIs('admin.calendar'),
+    ],
 ];
 @endphp
 
@@ -68,14 +80,14 @@ $links = [
                         <ul id="dropdown-example" class="hidden py-2 space-y-2">
                             @foreach ($link['submenu'] as $item)
                                 <li>
-                                 <a href="{{ $item['href'] }}" 
+                                 <a href="{{ $item['href'] }}" wire:navigate
                                     class="flex items-center w-full p-2 text-gray-300 transition duration-75 rounded-lg pl-11 group hover:bg-gray-800 hover:text-white">
                                     {{$item['name']}}</a>
                                 </li>
                             @endforeach
                         </ul>
                     @else
-                        <a href="{{ $link['href'] }}"
+                        <a href="{{ $link['href'] }}" wire:navigate
                             class="flex items-center p-2 rounded-lg group transition-colors duration-200 {{ $link['active'] ? 'bg-gray-800 text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white border-transparent' }}">
                             <span class="w-6 h-6 inline-flex justify-center items-center {{ $link['active'] ? 'text-white' : 'text-gray-400 group-hover:text-white' }} transition duration-75">
                                 <i class="{{ $link['icon'] }}"></i>

@@ -31,7 +31,8 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div class="flex gap-2">
-                            <x-button icon="pencil" primary flat href="{{ route('admin.doctors.edit', $doctor) }}" />
+                            <x-wire-button icon="clock" warning flat href="{{ route('admin.doctors.schedules', $doctor) }}" title="Horarios" />
+                            <x-wire-button icon="pencil" primary flat href="{{ route('admin.doctors.edit', $doctor) }}" />
                         </div>
                     </td>
                 </tr>

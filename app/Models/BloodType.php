@@ -13,4 +13,10 @@ class BloodType extends Model
         return $this->hasMany(Patient::class);
     }
 
+    public static function getCached()
+    {
+        return \Illuminate\Support\Facades\Cache::remember('blood_types_all', 3600, function () {
+            return self::all();
+        });
+    }
 }
