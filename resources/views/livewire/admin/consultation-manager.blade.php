@@ -71,7 +71,7 @@
 
     {{-- Modal Consultas Anteriores --}}
     <x-wire-modal wire:model.defer="showHistoryModal" max-width="4xl">
-        <x-card title="Historial Clínico - {{ $appointment->patient->first_name }}">
+        <x-wire-card title="Historial Clínico - {{ $appointment->patient->first_name }}">
             <div class="space-y-6 overflow-y-auto max-h-[60vh]">
                 @forelse($pastConsultations as $past)
                     <div class="border-l-4 border-blue-500 pl-4 py-2 bg-gray-50 rounded-r-lg">
@@ -93,6 +93,6 @@
                     <x-wire-button flat label="Cerrar" x-on:click="close" />
                 </div>
             </x-slot>
-        </x-card>
+        </x-wire-card>
     </x-wire-modal>
 </div>
