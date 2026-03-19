@@ -36,7 +36,7 @@ class AppointmentCreate extends Component
     {
         $this->validate();
 
-        Appointment::create([
+        $appointment = Appointment::create([
             'patient_id' => $this->patient_id,
             'doctor_id' => $this->doctor_id,
             'date' => $this->date,
@@ -45,6 +45,12 @@ class AppointmentCreate extends Component
             'reason' => $this->reason,
             'status' => 1, // Programada
         ]);
+
+        $patient = Patient::find($this->patient_id);
+        
+        if ($patient && $patient->email) {
+            \Illuminate\Support\Facades\Mail::to($patient->email)->send(new \App\Mail\AppointmentReceipt($appointment));
+        }
 
         session()->flash('swal', [
             'icon' => 'success',
