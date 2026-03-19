@@ -12,10 +12,16 @@ jobs:
       with:
         php-version: '8.2' # O la versión que estés usando
     - name: Install Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Generate key
       run: php artisan key:generate
+    - name: Prepare Database
+      run: |
+        touch database/database.sqlite
     - name: Execute tests
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
       run: php artisan test
