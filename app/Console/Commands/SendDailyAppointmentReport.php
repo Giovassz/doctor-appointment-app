@@ -32,10 +32,23 @@ class SendDailyAppointmentReport extends Command
                             ->orderBy('start_time')
                             ->get();
 
+        // 1. Enviar el reporte global al Administrador
         $adminEmail = env('ADMIN_EMAIL', 'admin@example.com');
-        
         \Illuminate\Support\Facades\Mail::to($adminEmail)->send(new \App\Mail\DailyAppointmentReport($appointments, $today));
-        
-        $this->info("Reporte diario enviado a {$adminEmail} con {$appointments->count()} citas.");
+        $this->info("Reporte global diario enviado a {$adminEmail} con {$appointments->count()} citas.");
+
+        // 2. Enviar la agenda específica a cada Doctor
+        $groupedByDoctor = $appointments->groupBy('doctor_id');
+
+        foreach ($groupedByDoctor as $doctorId => $doctorAppointments) {
+            $doctorUser = $doctorAppointments->first()->doctor->user ?? null;
+            
+            if ($doctorUser && $doctorUser->email) {
+                \Illuminate\Support\Facades\Mail::to($doctorUser->email)
+                    ->send(new \App\Mail\DoctorDailySchedule($doctorAppointments, $today));
+                    
+                $this->info("Agenda enviada al Doctor {$doctorUser->name} ({$doctorUser->email}) con {$doctorAppointments->count()} pacientes.");
+            }
+        }
     }
 }
